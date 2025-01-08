@@ -11,6 +11,8 @@ const Home = () => {
 
   const inputHandler = (e) => {
     setInput(e.target.value);
+    if (e.target.value === "")
+      setDisplayCoin(allCoin);
   }
 
   const searchHandler = async (e) => {
@@ -32,7 +34,13 @@ const Home = () => {
         <h1>Largest <br /> Crypto Marketplace</h1>
         <p>Welcome to the world's largest cryptocurrency marketplace. Sign up to explore more about cryptos.</p>
         <form onSubmit={searchHandler}>
-          <input onChange={inputHandler} value={input} type="text" placeholder='Search crypto...' required />
+
+          <input onChange={inputHandler} list='coinlist' value={input} type="text" placeholder='Search crypto...' required />
+          <datalist id='coinlist'>
+            {allCoin.map((item, index) => (<option key={index} value={item.name} />))}
+          </datalist>
+
+
           <button type='submit'>Search</button>
         </form>
       </div>
